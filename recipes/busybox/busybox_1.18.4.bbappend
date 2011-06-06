@@ -1,4 +1,4 @@
-PR .= ".2"
+PR .= ".3"
 
 THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
-FILESPATH =. "${@base_set_filespath(["${THISDIR}/${PN}-${PV}"], d)}:"
+FILESPATH =. "${@base_set_filespath(["${THISDIR}/${PN}-${PV}", "${THISDIR}/files"], d)}:"
