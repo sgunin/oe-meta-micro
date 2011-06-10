@@ -1,12 +1,13 @@
 DESCRIPTION = "Miscellaneous files for the base system."
 SECTION = "base"
 PRIORITY = "required"
-PR = "r102"
+PR = "r104"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://licenses/GPL-2;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = " \
+	   file://fstab \
            file://nsswitch.conf \
            file://licenses/BSD \
            file://licenses/GPL-2 \
@@ -33,23 +34,24 @@ hostname = "oe-micro"
 
 do_install () {
 	for d in ${dirs755}; do
-		install -m 0755 -d ${D}$d
+		install -m 0755 -d "${D}$d"
 	done
 	for d in ${dirs1777}; do
-		install -m 1777 -d ${D}$d
+		install -m 1777 -d "${D}$d"
 	done
 	for d in ${dirs2775}; do
-		install -m 2755 -d ${D}$d
+		install -m 2755 -d "${D}$d"
 	done
 	for d in ${volatiles}; do
-                if [ -d ${D}${localstatedir}/volatile/$d ]; then
-                        ln -sf volatile/$d ${D}/${localstatedir}/$d
+                if [ -d "${D}${localstatedir}/volatile/$d" ]; then
+                        ln -sf volatile/$d "${D}/${localstatedir}/$d"
                 fi
 	done
 
-	echo ${hostname} > ${D}${sysconfdir}/hostname
+	echo ${hostname} > "${D}${sysconfdir}/hostname"
 
-	install -m 0644 ${WORKDIR}/nsswitch.conf ${D}${sysconfdir}/nsswitch.conf
+	install -m 0644 "${WORKDIR}/fstab" "${D}${sysconfdir}/fstab"
+	install -m 0644 "${WORKDIR}/nsswitch.conf" "${D}${sysconfdir}/nsswitch.conf"
 }
 
 PACKAGES = "${PN}-dbg ${PN}-doc ${PN}"
