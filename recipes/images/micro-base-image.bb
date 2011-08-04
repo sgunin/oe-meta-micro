@@ -9,7 +9,6 @@ IMAGE_INSTALL = "base-files \
 		 dropbear \
 		 netbase \
 		 busybox \
-		 busybox-mdev \
 		 sysvinit sysvinit-pidof"
 IMAGE_LINGUAS = ""
 
